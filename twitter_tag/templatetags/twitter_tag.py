@@ -54,6 +54,8 @@ class BaseTwitterTag(Tag):
                                          settings.TWITTER_OAUTH_SECRET,
                                          settings.TWITTER_CONSUMER_KEY,
                                          settings.TWITTER_CONSUMER_SECRET))
+            kwargs['_timeout'] = settings.TWITTER_CONNECTION_TIMEOUT
+            raise Exception(kwargs)
             json = self.get_json(twitter, **self.get_api_call_params(**kwargs))
         except (TwitterError, URLError, ValueError, http_client.HTTPException) as e:
             logging.getLogger(__name__).error(str(e))
